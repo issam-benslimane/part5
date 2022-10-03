@@ -40,6 +40,26 @@ function App() {
     }
   };
 
+  const updateBlog = async (id, newBlog) => {
+    try {
+      const updatedBlog = await blogService.update(id, newBlog);
+      setBlogs(blogs.map((blog) => (blog.id === id ? updatedBlog : blog)));
+    } catch (error) {
+      const errorMsg = error.response.data.error;
+      displayMessage(errorMsg, "error");
+    }
+  };
+
+  const removeBlog = async (id) => {
+    try {
+      await blogService.remove(id);
+      setBlogs(blogs.filter((blog) => blog.id !== id));
+    } catch (error) {
+      const errorMsg = error.response.data.error;
+      displayMessage(errorMsg, "error");
+    }
+  };
+
   const displayMessage = (content, type = "success") => {
     setMessage({ content, type });
     setTimeout(() => {
@@ -54,7 +74,12 @@ function App() {
         <h2>Blogs</h2>
         <p>{user.username} logged in</p>
         <BlogForm addBlog={addBlog} />
-        <Blogs blogs={blogs} />
+        <Blogs
+          blogs={blogs}
+          user={user}
+          updateBlog={updateBlog}
+          removeBlog={removeBlog}
+        />
       </div>
     );
   }
