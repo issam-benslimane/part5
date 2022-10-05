@@ -1,5 +1,5 @@
-import React from "react";
-import loginService from "../services/login";
+import React from 'react';
+import loginService from '../services/login';
 
 const LoginForm = ({ logUser, displayMessage }) => {
   const handleSubmit = async (ev) => {
@@ -14,12 +14,12 @@ const LoginForm = ({ logUser, displayMessage }) => {
       logUser(user);
     } catch (error) {
       const errorMsg = error.response.data.error;
-      displayMessage(errorMsg, "error");
+      displayMessage(errorMsg, 'error');
     }
   };
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Login in to application</h2>
+    <form onSubmit={handleSubmit} className="login-form">
+      <h2>Login to application</h2>
       <div>
         <label htmlFor="username">username:</label>
         <input type="text" name="username" id="username" />

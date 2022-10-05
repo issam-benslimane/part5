@@ -1,9 +1,9 @@
-import React from "react";
-import Blog from "./Blog";
+import React from 'react';
+import Blog from './Blog';
 
 const sortByLikes = (b, a) => a.likes - b.likes;
 
-const Blogs = ({ blogs, user, updateBlog, removeBlog }) => {
+const Blogs = ({ blogs, user, updateBlogs, displayMessage }) => {
   return (
     <ul>
       {blogs.sort(sortByLikes).map((blog) => (
@@ -11,8 +11,9 @@ const Blogs = ({ blogs, user, updateBlog, removeBlog }) => {
           key={blog.id}
           blog={blog}
           user={user}
-          updateBlog={updateBlog}
-          removeBlog={removeBlog}
+          updateBlog={updateBlogs('update')}
+          removeBlog={updateBlogs('remove')}
+          displayMessage={displayMessage}
         />
       ))}
     </ul>
